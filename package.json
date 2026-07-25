@@ -1,0 +1,19 @@
+{
+  "name": "krishi-seva",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --names frontend,backend --prefix-colors blue,green \"npm run dev --workspace=@krishiseva/frontend\" \"npm run dev --workspace=@krishiseva/backend\"",
+    "dev:frontend": "npm run dev --workspace=@krishiseva/frontend",
+    "dev:backend": "npm run dev --workspace=@krishiseva/backend",
+    "build": "npm run build --workspace=@krishiseva/frontend && npm run build --workspace=@krishiseva/backend",
+    "build:frontend": "npm run build --workspace=@krishiseva/frontend",
+    "build:backend": "npm run build --workspace=@krishiseva/backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
