@@ -20,7 +20,7 @@ function publicClient() {
 }
 
 export const listSchemes = createServerFn({ method: "POST" })
-  .inputValidator((i: unknown) =>
+  .validator((i: unknown) =>
     z
       .object({
         state: z.string().max(120).optional(),
@@ -42,7 +42,7 @@ export const listSchemes = createServerFn({ method: "POST" })
   });
 
 export const getSchemeBySlug = createServerFn({ method: "POST" })
-  .inputValidator((i: unknown) => z.object({ slug: z.string().min(1).max(120) }).parse(i))
+  .validator((i: unknown) => z.object({ slug: z.string().min(1).max(120) }).parse(i))
   .handler(async ({ data }) => {
     const { data: row, error } = await publicClient()
       .from("schemes")

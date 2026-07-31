@@ -9,7 +9,7 @@ const kinds = ["leaf", "product", "profile"] as const;
 
 export const createUploadUrl = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) =>
+  .validator((i: unknown) =>
     z
       .object({
         kind: z.enum(kinds),
@@ -32,7 +32,7 @@ export const createUploadUrl = createServerFn({ method: "POST" })
 
 export const createDownloadUrl = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) =>
+  .validator((i: unknown) =>
     z
       .object({ path: z.string().min(1).max(500), expiresIn: z.number().int().min(30).max(3600).default(600) })
       .parse(i),

@@ -34,7 +34,7 @@ export const getMyProfile = createServerFn({ method: "GET" })
 
 export const updateMyProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => profileUpdateSchema.parse(input))
+  .validator((input: unknown) => profileUpdateSchema.parse(input))
   .handler(async ({ data, context }) => {
     const { data: row, error } = await context.supabase
       .from("farmer_profiles")
@@ -48,7 +48,7 @@ export const updateMyProfile = createServerFn({ method: "POST" })
 
 export const completeOnboarding = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => profileUpdateSchema.parse(input))
+  .validator((input: unknown) => profileUpdateSchema.parse(input))
   .handler(async ({ data, context }) => {
     const payload = { ...data, onboarding_completed: true };
     const { data: row, error } = await context.supabase

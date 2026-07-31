@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { MapPin, Loader2 } from "lucide-react";
+import { Languages, Loader2, MapPin, Ruler, Sprout, UserRound } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -19,6 +21,7 @@ import { getMyProfile, updateMyProfile } from "@/lib/profile.functions";
 import { reverseGeocodeCoords } from "@/lib/weather.functions";
 import { SEASONS, type Season } from "@/lib/utils/seasonDetector";
 import { LANGUAGES, useI18n, type Lang } from "@/lib/i18n";
+import { FarmPageHero } from "@/components/FarmPageHero";
 
 const SOILS = [
   "alluvial",
@@ -137,13 +140,97 @@ function ProfilePage() {
     );
   }
 
+  const displayName = profile?.full_name || form.full_name || "Your farm";
+  const initials = displayName
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+  const location = [profile?.district, profile?.state].filter(Boolean).join(", ");
+  const crops = profile?.primary_crops ?? [];
+
   return (
     <PageShell>
-      <div className="mx-auto max-w-2xl px-4 py-8">
-        <h1 className="text-3xl font-bold">{t("profile.title")}</h1>
+      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-10">
+        <FarmPageHero
+          eyebrow="Farm identity"
+          title={t("profile.title")}
+          description="Keep your farm details current so weather, recommendations, and market tools work around your real context."
+          image="farmer"
+        />
 
-        <Card className="mt-6 border-border/60 bg-card/70">
-          <CardContent className="space-y-4 p-6">
+        <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)]">
+          <aside className="space-y-4">
+            <Card className="overflow-hidden border-border/60 bg-card/90 lift-shadow">
+              <div className="h-20 bg-linear-to-r from-primary via-primary/85 to-accent" />
+              <CardContent className="relative p-6 pt-0">
+                <Avatar className="-mt-10 h-20 w-20 border-4 border-card bg-primary text-xl font-bold text-primary-foreground">
+                  <AvatarFallback className="bg-primary text-primary-foreground">
+                    {initials || <UserRound className="h-8 w-8" />}
+                  </AvatarFallback>
+                </Avatar>
+                <h2 className="mt-4 text-xl font-bold">{displayName}</h2>
+                <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
+                  <MapPin className="h-4 w-4 text-accent" />
+                  {location || "Add your location"}
+                </p>
+                <div className="mt-5 grid grid-cols-2 gap-2">
+                  <div className="rounded-2xl bg-secondary/70 p-3">
+                    <Ruler className="h-4 w-4 text-primary" />
+                    <p className="mt-2 text-lg font-bold">
+                      {profile?.land_size_hectares ?? "—"}
+                    </p>
+                    <p className="text-xs text-muted-foreground">Hectares</p>
+                  </div>
+                  <div className="rounded-2xl bg-secondary/70 p-3">
+                    <Sprout className="h-4 w-4 text-primary" />
+                    <p className="mt-2 text-lg font-bold">{crops.length || "—"}</p>
+                    <p className="text-xs text-muted-foreground">Crops</p>
+                  </div>
+                </div>
+                <div className="mt-5">
+                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                    Growing now
+                  </p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {crops.length ? (
+                      crops.map((crop) => (
+                        <Badge key={crop} variant="secondary" className="rounded-full capitalize">
+                          {crop}
+                        </Badge>
+                      ))
+                    ) : (
+                      <span className="text-sm text-muted-foreground">No crops added yet</span>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/60 bg-secondary/35">
+              <CardContent className="p-5">
+                <div className="flex items-center gap-2 text-sm font-semibold">
+                  <Languages className="h-4 w-4 text-primary" /> Personalisation
+                </div>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  Your language, soil, season, and location make every recommendation more useful.
+                </p>
+              </CardContent>
+            </Card>
+          </aside>
+
+          <Card className="border-border/60 bg-card/90 lift-shadow">
+            <CardContent className="space-y-6 p-5 sm:p-7">
+              <div>
+                <p className="text-sm font-semibold">Farm details</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Edit the information shown on your farm card and used across Krishi Seva.
+                </p>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="full_name">{t("profile.name")}</Label>
               <Input
@@ -160,8 +247,9 @@ function ProfilePage() {
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
               />
             </div>
+              </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="district">{t("profile.district")}</Label>
                 <Input
@@ -183,7 +271,7 @@ function ProfilePage() {
             <Button
               type="button"
               variant="secondary"
-              className="w-full rounded-full"
+              className="w-full rounded-full sm:w-auto"
               onClick={refreshLocation}
               disabled={locating}
             >
@@ -195,26 +283,27 @@ function ProfilePage() {
               {t("profile.refreshLocation")}
             </Button>
 
-            <div className="space-y-2">
-              <Label htmlFor="land">{t("profile.land")}</Label>
-              <Input
-                id="land"
-                inputMode="decimal"
-                value={form.land}
-                onChange={(e) => setForm({ ...form, land: e.target.value })}
-              />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="land">{t("profile.land")}</Label>
+                <Input
+                  id="land"
+                  inputMode="decimal"
+                  value={form.land}
+                  onChange={(e) => setForm({ ...form, land: e.target.value })}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="crops">{t("profile.crops")}</Label>
+                <Input
+                  id="crops"
+                  value={form.crops}
+                  onChange={(e) => setForm({ ...form, crops: e.target.value })}
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="crops">{t("profile.crops")}</Label>
-              <Input
-                id="crops"
-                value={form.crops}
-                onChange={(e) => setForm({ ...form, crops: e.target.value })}
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label>{t("crop.season")}</Label>
                 <Select
@@ -273,14 +362,15 @@ function ProfilePage() {
             </div>
 
             <Button
-              className="w-full rounded-full"
+              className="w-full rounded-full sm:w-auto sm:px-8"
               disabled={save.isPending}
               onClick={() => save.mutate()}
             >
               {save.isPending ? t("common.saving") : t("common.save")}
             </Button>
           </CardContent>
-        </Card>
+          </Card>
+        </div>
       </div>
     </PageShell>
   );

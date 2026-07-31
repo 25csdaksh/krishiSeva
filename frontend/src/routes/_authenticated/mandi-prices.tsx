@@ -1,9 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
+import { FarmPageHero } from "@/components/FarmPageHero";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -31,10 +33,20 @@ export const Route = createFileRoute("/_authenticated/mandi-prices")({
       { name: "robots", content: "noindex" },
     ],
   }),
-  component: MandiPrices,
+  component: RedirectToMarket,
 });
 
-function MandiPrices() {
+
+function RedirectToMarket() {
+  // keep the route but redirect to the consolidated market page
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate({ to: "/market", replace: true });
+  }, [navigate]);
+  return null;
+}
+
+export function MandiPricesSection() {
   const { t } = useI18n();
   const [filters, setFilters] = useState({ commodity: "", state: "", district: "" });
   const [applied, setApplied] = useState(filters);
@@ -55,11 +67,16 @@ function MandiPrices() {
   const records = data?.records ?? [];
 
   return (
-    <PageShell>
-      <div className="mx-auto max-w-5xl px-4 py-8">
-        <h1 className="text-3xl font-bold">{t("prices.title")}</h1>
+    <div className="mx-auto max-w-5xl px-4 py-8">
+        <FarmPageHero
+          eyebrow="Market intelligence"
+          title={t("prices.title")}
+          description="Search current mandi records by crop and place so you can compare the rate before you sell."
+          image="fields"
+        />
 
-        <div className="mt-6 grid gap-3 sm:grid-cols-4">
+        <Card className="mt-6 border-border/60 bg-card/85 soft-shadow">
+          <CardContent className="grid gap-3 p-5 sm:grid-cols-4 sm:p-6">
           <div className="space-y-2">
             <Label htmlFor="commodity">{t("prices.commodity")}</Label>
             <Input
@@ -89,11 +106,12 @@ function MandiPrices() {
               <Search className="mr-1 h-4 w-4" /> {t("common.search")}
             </Button>
           </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {data?.error && <p className="mt-4 text-sm text-destructive">{data.error}</p>}
 
-        <div className="mt-6 overflow-x-auto rounded-2xl border border-border/60 bg-surface/40">
+        <div className="mt-6 overflow-x-auto rounded-2xl border border-border/60 bg-card/85 soft-shadow">
           {isLoading ? (
             <Skeleton className="h-64 w-full" />
           ) : records.length === 0 ? (
@@ -140,6 +158,8 @@ function MandiPrices() {
           )}
         </div>
       </div>
-    </PageShell>
   );
 }
+
+// keep Route pointing to a redirect so the old /mandi-prices URL lands on /market
+Route.update({ component: RedirectToMarket });

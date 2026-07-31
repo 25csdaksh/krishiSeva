@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 export const getWeatherByCoords = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z.object({ lat: z.number(), lon: z.number() }).parse(input),
   )
   .handler(async ({ data }) => {
@@ -11,7 +11,7 @@ export const getWeatherByCoords = createServerFn({ method: "GET" })
   });
 
 export const reverseGeocodeCoords = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z.object({ lat: z.number(), lon: z.number() }).parse(input),
   )
   .handler(async ({ data }) => {

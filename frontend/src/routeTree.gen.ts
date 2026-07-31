@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as MarketRouteImport } from './routes/market'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as WeatherRouteImport } from './routes/weather'
 import { Route as AuthenticatedCropAnalysisRouteImport } from './routes/_authenticated/crop-analysis'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedLeafScanRouteImport } from './routes/_authenticated/leaf-scan'
@@ -58,6 +59,11 @@ const MarketRoute = MarketRouteImport.update({
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WeatherRoute = WeatherRouteImport.update({
+  id: '/weather',
+  path: '/weather',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedCropAnalysisRoute =
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/market': typeof MarketRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/weather': typeof WeatherRoute
   '/crop-analysis': typeof AuthenticatedCropAnalysisRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/leaf-scan': typeof AuthenticatedLeafScanRoute
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/market': typeof MarketRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/weather': typeof WeatherRoute
   '/crop-analysis': typeof AuthenticatedCropAnalysisRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/leaf-scan': typeof AuthenticatedLeafScanRoute
@@ -152,6 +160,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/market': typeof MarketRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/weather': typeof WeatherRoute
   '/_authenticated/crop-analysis': typeof AuthenticatedCropAnalysisRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/leaf-scan': typeof AuthenticatedLeafScanRoute
@@ -171,6 +180,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/market'
     | '/sitemap.xml'
+    | '/weather'
     | '/crop-analysis'
     | '/dashboard'
     | '/leaf-scan'
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/market'
     | '/sitemap.xml'
+    | '/weather'
     | '/crop-analysis'
     | '/dashboard'
     | '/leaf-scan'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/market'
     | '/sitemap.xml'
+    | '/weather'
     | '/_authenticated/crop-analysis'
     | '/_authenticated/dashboard'
     | '/_authenticated/leaf-scan'
@@ -225,6 +237,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   MarketRoute: typeof MarketRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  WeatherRoute: typeof WeatherRoute
   SchemesSlugRoute: typeof SchemesSlugRoute
   SchemesIndexRoute: typeof SchemesIndexRoute
 }
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/weather': {
+      id: '/weather'
+      path: '/weather'
+      fullPath: '/weather'
+      preLoaderRoute: typeof WeatherRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/crop-analysis': {
@@ -377,6 +397,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   MarketRoute: MarketRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  WeatherRoute: WeatherRoute,
   SchemesSlugRoute: SchemesSlugRoute,
   SchemesIndexRoute: SchemesIndexRoute,
 }

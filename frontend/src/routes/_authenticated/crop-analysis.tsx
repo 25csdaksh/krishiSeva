@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Loader2, Sprout } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
+import { FarmPageHero } from "@/components/FarmPageHero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -77,9 +78,14 @@ function CropAnalysis() {
   return (
     <PageShell>
       <div className="mx-auto max-w-3xl px-4 py-8">
-        <h1 className="text-3xl font-bold">{t("crop.title")}</h1>
+        <FarmPageHero
+          eyebrow="Plan with confidence"
+          title={t("crop.title")}
+          description="Recommendations use the farm details you have saved. Add optional soil readings when you have them for a more specific result."
+          image="farmer"
+        />
 
-        <Card className="mt-6 border-border/60 bg-card/70">
+        <Card className="mt-6 border-border/60 bg-card/85 soft-shadow">
           <CardContent className="p-6">
             <h2 className="text-sm font-medium text-muted-foreground">{t("crop.context")}</h2>
             <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -148,7 +154,7 @@ function CropAnalysis() {
               {crops.map((c) => (
                 <div
                   key={c.crop}
-                  className="rounded-2xl border border-border/60 bg-surface/50 p-5"
+                  className="rounded-2xl border border-border/60 bg-card/85 p-5 lift-shadow"
                 >
                   <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
                     <h3 className="truncate text-lg font-semibold">{c.crop}</h3>

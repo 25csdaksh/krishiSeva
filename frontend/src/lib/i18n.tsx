@@ -23,6 +23,7 @@ const en: Dict = {
   "nav.home": "Home",
   "nav.about": "About",
   "nav.market": "Market",
+  "nav.weather": "Weather",
   "nav.schemes": "Schemes",
   "nav.contact": "Contact",
   "nav.login": "Sign in",
@@ -31,6 +32,7 @@ const en: Dict = {
   "nav.leaf": "Leaf scan",
   "nav.crop": "Crop analysis",
   "nav.prices": "Mandi prices",
+  "nav.weather": "Weather",
   "nav.profile": "Profile",
   "nav.logout": "Sign out",
 
@@ -165,6 +167,11 @@ const en: Dict = {
   "dashboard.quick": "Quick actions",
   "dashboard.noLocation": "Add your farm location to see live weather.",
 
+  "weather.title": "Detailed local weather",
+  "weather.p": "In-depth current conditions and a 7-day forecast for your farm.",
+  "weather.noLocation": "Add your farm location to view detailed weather.",
+  "weather.setLocationHelp": "Update your profile with your farm coordinates.",
+
   "leaf.title": "Leaf disease detection",
   "leaf.p": "Take a clear photo of an affected leaf and we will suggest a likely cause and remedy.",
   "leaf.choose": "Choose a photo",
@@ -251,6 +258,7 @@ const hi: Dict = {
   "nav.leaf": "पत्ती जाँच",
   "nav.crop": "फसल सलाह",
   "nav.prices": "मंडी भाव",
+  "nav.weather": "मौसम",
   "nav.profile": "प्रोफ़ाइल",
   "nav.logout": "साइन आउट",
 
@@ -384,6 +392,11 @@ const hi: Dict = {
   "dashboard.quick": "त्वरित कार्य",
   "dashboard.noLocation": "मौसम देखने के लिए खेत का स्थान जोड़ें।",
 
+  "weather.title": "स्थानीय मौसम — विस्तृत",
+  "weather.p": "आपके खेत के लिए विस्तृत वर्तमान हालात और 7-दिन पूर्वानुमान।",
+  "weather.noLocation": "विस्तृत मौसम देखने के लिए खेत का स्थान जोड़ें।",
+  "weather.setLocationHelp": "अपने प्रोफ़ाइल में खेत के निर्देशांक अपडेट करें।",
+
   "leaf.title": "पत्ती रोग पहचान",
   "leaf.p": "प्रभावित पत्ती की साफ़ फोटो लें, हम संभावित कारण और उपाय बताएँगे।",
   "leaf.choose": "फोटो चुनें",
@@ -470,6 +483,7 @@ const gu: Dict = {
   "nav.leaf": "પાન તપાસ",
   "nav.crop": "પાક સલાહ",
   "nav.prices": "માર્કેટ ભાવ",
+  "nav.weather": "હવામાન",
   "nav.profile": "પ્રોફાઇલ",
   "nav.logout": "સાઇન આઉટ",
 
@@ -602,6 +616,11 @@ const gu: Dict = {
   "dashboard.rainTrend": "સંભવિત વરસાદ",
   "dashboard.quick": "ઝડપી ક્રિયાઓ",
   "dashboard.noLocation": "હવામાન જોવા ખેતરનું સ્થાન ઉમેરો.",
+
+  "weather.title": "સ્થાનિક હવામાન — વિગતવાર",
+  "weather.p": "તમારા ખેતરની હાલની સ્થિતિ અને 7-દિનની આગાહી સાથે વિગતવાર સ્થિતિ.",
+  "weather.noLocation": "વિગતવાર હવામાન જોવા માટે તમારું ખેતરની જગ્યા ઉમેરો.",
+  "weather.setLocationHelp": "તમારા પ્રોફાઇલમાં ખેતરના કોઓર્ડિનેટ્સ અપડેટ કરો.",
 
   "leaf.title": "પાન રોગ ઓળખ",
   "leaf.p": "અસરગ્રસ્ત પાનનો સ્પષ્ટ ફોટો લો, અમે સંભવિત કારણ અને ઉપાય જણાવીશું.",

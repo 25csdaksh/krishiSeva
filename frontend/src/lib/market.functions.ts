@@ -4,7 +4,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const listActiveMarketListings = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         crop: z.string().optional(),
@@ -42,7 +42,7 @@ export const listMyMarketListings = createServerFn({ method: "GET" })
 
 export const createMarketListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         crop_name: z.string().min(1),
@@ -69,7 +69,7 @@ export const createMarketListing = createServerFn({ method: "POST" })
 
 export const updateMarketListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         id: z.string(),
@@ -101,7 +101,7 @@ export const updateMarketListing = createServerFn({ method: "POST" })
 
 export const deleteMarketListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => z.object({ id: z.string() }).parse(input))
+  .validator((input: unknown) => z.object({ id: z.string() }).parse(input))
   .handler(async ({ data, context }) => {
     const { error } = await context.supabase
       .from("market_listings")

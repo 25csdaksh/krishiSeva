@@ -17,7 +17,7 @@ const listingSchema = z.object({
 
 export const listActiveMarketListings = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         crop: z.string().max(80).optional(),
@@ -54,7 +54,7 @@ export const listMyMarketListings = createServerFn({ method: "GET" })
 
 export const createMarketListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => listingSchema.parse(input))
+  .validator((input: unknown) => listingSchema.parse(input))
   .handler(async ({ data, context }) => {
     const { data: row, error } = await context.supabase
       .from("market_listings")
@@ -67,7 +67,7 @@ export const createMarketListing = createServerFn({ method: "POST" })
 
 export const updateMarketListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({ id: z.string().uuid() })
       .merge(listingSchema.partial())
@@ -89,7 +89,7 @@ export const updateMarketListing = createServerFn({ method: "POST" })
 
 export const deleteMarketListing = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
+  .validator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
   .handler(async ({ data, context }) => {
     const { error } = await context.supabase
       .from("market_listings")

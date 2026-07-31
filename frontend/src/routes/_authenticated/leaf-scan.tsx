@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { ImagePlus, Loader2, ScanLine } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
+import { FarmPageHero } from "@/components/FarmPageHero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -69,15 +70,19 @@ function LeafScan() {
   return (
     <PageShell>
       <div className="mx-auto max-w-3xl px-4 py-8">
-        <h1 className="text-3xl font-bold">{t("leaf.title")}</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{t("leaf.p")}</p>
+        <FarmPageHero
+          eyebrow="Plant health check"
+          title={t("leaf.title")}
+          description={t("leaf.p")}
+          image="farmer"
+        />
 
-        <Card className="mt-6 border-border/60 bg-card/70">
+        <Card className="mt-6 border-border/60 bg-card/85 soft-shadow">
           <CardContent className="space-y-4 p-6">
             <button
               type="button"
               onClick={() => fileRef.current?.click()}
-              className="grid w-full place-items-center rounded-2xl border border-dashed border-border bg-surface/40 p-8 text-center transition-colors hover:border-primary/60"
+              className="grid min-h-64 w-full place-items-center rounded-2xl border border-dashed border-border bg-secondary/35 p-8 text-center transition-colors hover:border-primary/60"
             >
               {preview ? (
                 <img

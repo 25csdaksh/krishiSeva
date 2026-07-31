@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { PageShell } from "@/components/PageShell";
+import { FarmPageHero } from "@/components/FarmPageHero";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -151,33 +152,43 @@ function Marketplace() {
   return (
     <PageShell>
       <div className="mx-auto max-w-5xl px-4 py-8">
-        <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4">
-          <h1 className="truncate text-3xl font-bold">{t("market.title")}</h1>
-          <Button
-            className="shrink-0 rounded-full"
-            onClick={() => {
-              setForm(EMPTY);
-              setFile(null);
-              setOpen(true);
-            }}
-          >
-            <Plus className="mr-1 h-4 w-4" /> {t("market.add")}
-          </Button>
-        </header>
+        <FarmPageHero
+          eyebrow="Direct from the farm"
+          title={t("market.title")}
+          description="Create a clear produce listing, set your own price, and browse listings shared by other farmers."
+          image="fields"
+          action={
+            <Button
+              className="rounded-full bg-background text-foreground hover:bg-background/90"
+              onClick={() => {
+                setForm(EMPTY);
+                setFile(null);
+                setOpen(true);
+              }}
+            >
+              <Plus className="mr-1 h-4 w-4" /> {t("market.add")}
+            </Button>
+          }
+        />
 
         <Tabs defaultValue="mine" className="mt-6">
-          <TabsList>
+          <TabsList className="rounded-full bg-secondary/70 p-1">
             <TabsTrigger value="mine">{t("market.mine")}</TabsTrigger>
             <TabsTrigger value="all">{t("market.browse")}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="mine" className="mt-4">
             {(mine?.length ?? 0) === 0 ? (
-              <p className="text-sm text-muted-foreground">{t("market.empty")}</p>
+              <Card className="border-dashed border-border/80 bg-secondary/30">
+                <CardContent className="p-8 text-center">
+                  <p className="font-semibold">Your selling space is ready</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{t("market.empty")}</p>
+                </CardContent>
+              </Card>
             ) : (
               <div className="grid gap-4 sm:grid-cols-2">
                 {mine!.map((l) => (
-                  <Card key={l.id} className="border-border/60 bg-card/70">
+                  <Card key={l.id} className="overflow-hidden border-border/60 bg-card/85 transition-shadow hover:lift-shadow">
                     <CardContent className="p-5">
                       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
                         <div className="min-w-0">
@@ -250,11 +261,15 @@ function Marketplace() {
 
           <TabsContent value="all" className="mt-4">
             {(all?.length ?? 0) === 0 ? (
-              <p className="text-sm text-muted-foreground">{t("market.emptyAll")}</p>
+              <Card className="border-dashed border-border/80 bg-secondary/30">
+                <CardContent className="p-8 text-center text-sm text-muted-foreground">
+                  {t("market.emptyAll")}
+                </CardContent>
+              </Card>
             ) : (
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {all!.map((l) => (
-                  <Card key={l.id} className="border-border/60 bg-card/70">
+                  <Card key={l.id} className="border-border/60 bg-card/85 transition-shadow hover:lift-shadow">
                     <CardContent className="p-5">
                       <h2 className="truncate text-lg font-semibold">{l.crop_name}</h2>
                       <p className="mt-1 text-sm text-primary">

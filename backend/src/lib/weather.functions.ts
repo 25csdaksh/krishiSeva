@@ -10,7 +10,7 @@ const coordsSchema = z.object({
 
 export const getWeatherByCoords = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) => coordsSchema.parse(i))
+  .validator((i: unknown) => coordsSchema.parse(i))
   .handler(async ({ data }) => {
     const { fetchCurrentWeather, fetchForecast } = await import("./services/weather.server");
     const [current, forecast] = await Promise.all([
@@ -22,7 +22,7 @@ export const getWeatherByCoords = createServerFn({ method: "POST" })
 
 export const reverseGeocodeCoords = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((i: unknown) => coordsSchema.parse(i))
+  .validator((i: unknown) => coordsSchema.parse(i))
   .handler(async ({ data }) => {
     const { reverseGeocode } = await import("./services/maps.server");
     return reverseGeocode(data.lat, data.lon);

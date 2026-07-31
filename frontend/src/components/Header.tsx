@@ -13,6 +13,7 @@ const publicLinks = [
   { to: "/", key: "nav.home" },
   { to: "/about", key: "nav.about" },
   { to: "/market", key: "nav.market" },
+  { to: "/weather", key: "nav.weather" },
   { to: "/schemes", key: "nav.schemes" },
   { to: "/contact", key: "nav.contact" },
 ] as const;
@@ -22,7 +23,7 @@ const appLinks = [
   { to: "/leaf-scan", key: "nav.leaf" },
   { to: "/crop-analysis", key: "nav.crop" },
   { to: "/marketplace", key: "nav.market" },
-  { to: "/mandi-prices", key: "nav.prices" },
+  { to: "/weather", key: "nav.weather" },
   { to: "/profile", key: "nav.profile" },
 ] as const;
 

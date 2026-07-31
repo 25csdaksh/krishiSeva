@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Users, Tag, Settings2 } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
+import { MandiPricesSection } from "@/routes/_authenticated/mandi-prices";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 
@@ -54,6 +55,10 @@ function MarketInfoPage() {
             {t("marketInfo.cta")}
           </Link>
         </Button>
+        {/* Embedded mandi prices section */}
+        <div className="mt-12">
+          <MandiPricesSection />
+        </div>
       </section>
     </PageShell>
   );

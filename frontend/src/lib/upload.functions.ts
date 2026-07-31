@@ -4,7 +4,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const createUploadUrl = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         kind: z.enum(["leaf", "product", "profile"]),
@@ -24,7 +24,7 @@ export const createUploadUrl = createServerFn({ method: "POST" })
 
 export const createDownloadUrl = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z.object({ path: z.string(), expiresIn: z.number().optional() }).parse(input),
   )
   .handler(async ({ data, context }) => {

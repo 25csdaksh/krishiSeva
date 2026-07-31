@@ -4,7 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 
 export const listSchemes = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({ state: z.string().optional(), category: z.string().optional() })
       .default({})
@@ -29,7 +29,7 @@ export const listSchemes = createServerFn({ method: "GET" })
   });
 
 export const getSchemeBySlug = createServerFn({ method: "GET" })
-  .inputValidator((input: unknown) => z.object({ slug: z.string() }).parse(input))
+  .validator((input: unknown) => z.object({ slug: z.string() }).parse(input))
   .handler(async ({ data }) => {
     const supabase = createClient<Database>(
       process.env.SUPABASE_URL!,

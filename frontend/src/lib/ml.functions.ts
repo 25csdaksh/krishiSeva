@@ -4,7 +4,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
 export const analyzeLeafDisease = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z.object({ image_url: z.string().min(1), crop_name: z.string().optional() }).parse(input),
   )
   .handler(async ({ data, context }) => {
@@ -40,7 +40,7 @@ export const analyzeLeafDisease = createServerFn({ method: "POST" })
 
 export const recommendCropForProfile = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((input: unknown) =>
+  .validator((input: unknown) =>
     z
       .object({
         N: z.number().optional(),
