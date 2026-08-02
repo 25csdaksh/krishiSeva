@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /auth
+Disallow: /dashboard
+Disallow: /onboarding
+Disallow: /leaf-scan
+Disallow: /crop-analysis
+Disallow: /marketplace
+Disallow: /mandi-prices
+Disallow: /profile
