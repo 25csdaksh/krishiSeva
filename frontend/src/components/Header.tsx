@@ -20,6 +20,7 @@ const publicLinks = [
 
 const appLinks = [
   { to: "/dashboard", key: "nav.dashboard" },
+  { to: "/weather", key: "nav.weather" },
   { to: "/leaf-scan", key: "nav.leaf" },
   { to: "/crop-analysis", key: "nav.crop" },
   { to: "/marketplace", key: "nav.market" },
