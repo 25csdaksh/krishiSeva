@@ -1,14 +1,13 @@
 import { i as __toESM } from "../../_runtime.mjs";
 import { l as require_react_dom, u as require_react } from "../@floating-ui/react-dom+[...].mjs";
-import { a as Primitive, c as createContextScope, d as useComposedRefs, f as require_jsx_runtime, i as useCallbackRef, s as useLayoutEffect2, u as createSlot } from "./react-avatar+[...].mjs";
-import { c as ReactRemoveScroll, d as FocusScope, f as useFocusGuards, l as hideOthers, p as DismissableLayer, u as Portal } from "./react-dialog+[...].mjs";
+import { a as useId, c as useControllableState, f as createSlot, i as Presence, l as useLayoutEffect2, m as require_jsx_runtime, o as Primitive, p as useComposedRefs, u as createContextScope } from "./react-collapsible+[...].mjs";
+import { c as ReactRemoveScroll, d as FocusScope, f as useFocusGuards, l as hideOthers, m as useCallbackRef, p as DismissableLayer, u as Portal } from "./react-dialog+[...].mjs";
 import { t as composeEventHandlers } from "../radix-ui__primitive.mjs";
-import { a as useId, i as Presence, o as useControllableState } from "./react-collapsible+[...].mjs";
 import { t as createCollection } from "../radix-ui__react-collection.mjs";
 import { t as useDirection } from "../radix-ui__react-direction.mjs";
 import { _ as Content, g as Anchor, v as Root2, y as createPopperScope } from "./react-dropdown-menu+[...].mjs";
 import { t as clamp } from "../radix-ui__number.mjs";
-//#region ../node_modules/@radix-ui/react-use-previous/dist/index.mjs
+//#region node_modules/@radix-ui/react-use-previous/dist/index.mjs
 var import_react_dom = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var __defProp$1 = Object.defineProperty;
@@ -31,7 +30,7 @@ function usePrevious(value) {
 }
 __name$1(usePrevious, "usePrevious");
 //#endregion
-//#region ../node_modules/@radix-ui/react-visually-hidden/dist/index.mjs
+//#region node_modules/@radix-ui/react-visually-hidden/dist/index.mjs
 var import_jsx_runtime = require_jsx_runtime();
 var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	position: "absolute",
@@ -46,7 +45,7 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	wordWrap: "normal"
 });
 //#endregion
-//#region ../node_modules/@radix-ui/react-select/dist/index.mjs
+//#region node_modules/@radix-ui/react-select/dist/index.mjs
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", {
 	value,
@@ -586,17 +585,18 @@ var SelectItemAlignedPosition = /* @__PURE__ */ import_react.forwardRef(/* @__PU
 	useLayoutEffect2(() => {
 		if (content) setContentZIndex(window.getComputedStyle(content).zIndex);
 	}, [content]);
+	const handleScrollButtonChange = import_react.useCallback((node) => {
+		if (node && shouldRepositionRef.current === true) {
+			position();
+			focusSelectedItem?.();
+			shouldRepositionRef.current = false;
+		}
+	}, [position, focusSelectedItem]);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectViewportProvider, {
 		scope: __scopeSelect,
 		contentWrapper,
 		shouldExpandOnScrollRef,
-		onScrollButtonChange: import_react.useCallback((node) => {
-			if (node && shouldRepositionRef.current === true) {
-				position();
-				focusSelectedItem?.();
-				shouldRepositionRef.current = false;
-			}
-		}, [position, focusSelectedItem]),
+		onScrollButtonChange: handleScrollButtonChange,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			ref: setContentWrapper,
 			style: {
@@ -708,7 +708,8 @@ var SelectItem = /* @__PURE__ */ import_react.forwardRef(/* @__PURE__ */ __name(
 	const isSelected = context.value === value;
 	const [textValue, setTextValue] = import_react.useState(textValueProp ?? "");
 	const [isFocused, setIsFocused] = import_react.useState(false);
-	const composedRefs = useComposedRefs(forwardedRef, useCallbackRef((node) => contentContext.itemRefCallback?.(node, value, disabled)));
+	const handleItemRefCallback = useCallbackRef((node) => contentContext.itemRefCallback?.(node, value, disabled));
+	const composedRefs = useComposedRefs(forwardedRef, handleItemRefCallback);
 	const textId = useId();
 	const pointerTypeRef = import_react.useRef("touch");
 	const handleSelect = /* @__PURE__ */ __name(() => {

@@ -1,13 +1,12 @@
 import { i as __toESM } from "../../_runtime.mjs";
 import { a as offset, c as useFloating, i as limitShift, n as flip, o as shift, r as hide, s as size, t as arrow, u as require_react } from "../@floating-ui/react-dom+[...].mjs";
-import { a as Primitive, c as createContextScope, d as useComposedRefs, f as require_jsx_runtime, i as useCallbackRef, o as dispatchDiscreteCustomEvent, s as useLayoutEffect2, u as createSlot } from "./react-avatar+[...].mjs";
-import { c as ReactRemoveScroll, d as FocusScope, f as useFocusGuards, l as hideOthers, p as DismissableLayer, u as Portal$1 } from "./react-dialog+[...].mjs";
+import { a as useId, c as useControllableState, f as createSlot, i as Presence, l as useLayoutEffect2, m as require_jsx_runtime, o as Primitive, p as useComposedRefs, s as dispatchDiscreteCustomEvent, u as createContextScope } from "./react-collapsible+[...].mjs";
+import { c as ReactRemoveScroll, d as FocusScope, f as useFocusGuards, l as hideOthers, m as useCallbackRef, p as DismissableLayer, u as Portal$1 } from "./react-dialog+[...].mjs";
 import { t as composeEventHandlers } from "../radix-ui__primitive.mjs";
-import { a as useId, i as Presence, o as useControllableState } from "./react-collapsible+[...].mjs";
 import { t as createCollection } from "../radix-ui__react-collection.mjs";
 import { t as useDirection } from "../radix-ui__react-direction.mjs";
 import { n as autoUpdate } from "../@floating-ui/dom+[...].mjs";
-//#region ../node_modules/@radix-ui/react-use-size/dist/index.mjs
+//#region node_modules/@radix-ui/react-use-size/dist/index.mjs
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var __defProp$5 = Object.defineProperty;
 var __name$5 = (target, value) => __defProp$5(target, "name", {
@@ -50,7 +49,7 @@ function useSize(element) {
 }
 __name$5(useSize, "useSize");
 //#endregion
-//#region ../node_modules/@radix-ui/react-popper/dist/index.mjs
+//#region node_modules/@radix-ui/react-popper/dist/index.mjs
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp$4 = Object.defineProperty;
 var __name$4 = (target, value) => __defProp$4(target, "name", {
@@ -79,10 +78,11 @@ var PopperAnchor = /* @__PURE__ */ import_react.forwardRef(/* @__PURE__ */ __nam
 	const context = usePopperContext(ANCHOR_NAME, __scopePopper);
 	const ref = import_react.useRef(null);
 	const onAnchorChange = context.onAnchorChange;
-	const composedRefs = useComposedRefs(forwardedRef, import_react.useCallback((node) => {
+	const callbackRef = import_react.useCallback((node) => {
 		ref.current = node;
 		if (node) onAnchorChange(node);
-	}, [onAnchorChange]));
+	}, [onAnchorChange]);
+	const composedRefs = useComposedRefs(forwardedRef, callbackRef);
 	const anchorRef = import_react.useRef(null);
 	import_react.useEffect(() => {
 		if (!virtualRef) return;
@@ -276,7 +276,7 @@ var Root2$1 = Popper;
 var Anchor = PopperAnchor;
 var Content = PopperContent;
 //#endregion
-//#region ../node_modules/@radix-ui/react-use-is-hydrated/dist/index.mjs
+//#region node_modules/@radix-ui/react-use-is-hydrated/dist/index.mjs
 var __defProp$3 = Object.defineProperty;
 var __name$3 = (target, value) => __defProp$3(target, "name", {
 	value,
@@ -305,7 +305,7 @@ function useIsHydratedModern() {
 __name$3(useIsHydratedModern, "useIsHydratedModern");
 var useIsHydrated2 = typeof useReactSyncExternalStore === "function" ? useIsHydratedModern : useIsHydrated;
 //#endregion
-//#region ../node_modules/@radix-ui/react-roving-focus/dist/index.mjs
+//#region node_modules/@radix-ui/react-roving-focus/dist/index.mjs
 var __defProp$2 = Object.defineProperty;
 var __name$2 = (target, value) => __defProp$2(target, "name", {
 	value,
@@ -507,7 +507,7 @@ __name$2(wrapArray$1, "wrapArray");
 var Root = RovingFocusGroup;
 var Item = RovingFocusGroupItem;
 //#endregion
-//#region ../node_modules/@radix-ui/react-menu/dist/index.mjs
+//#region node_modules/@radix-ui/react-menu/dist/index.mjs
 var __defProp$1 = Object.defineProperty;
 var __name$1 = (target, value) => __defProp$1(target, "name", {
 	value,
@@ -1200,7 +1200,7 @@ var Separator = MenuSeparator;
 var SubTrigger = MenuSubTrigger;
 var SubContent = MenuSubContent;
 //#endregion
-//#region ../node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs
+//#region node_modules/@radix-ui/react-dropdown-menu/dist/index.mjs
 var __defProp = Object.defineProperty;
 var __name = (target, value) => __defProp(target, "name", {
 	value,

@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
-import { c as createContextScope, d as useComposedRefs, f as require_jsx_runtime, u as createSlot } from "./@radix-ui/react-avatar+[...].mjs";
-//#region ../node_modules/@radix-ui/react-collection/dist/index.mjs
+import { f as createSlot, m as require_jsx_runtime, p as useComposedRefs, u as createContextScope } from "./@radix-ui/react-collapsible+[...].mjs";
+//#region node_modules/@radix-ui/react-collection/dist/index.mjs
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;
@@ -33,7 +33,8 @@ function createCollection(name) {
 	const CollectionSlotImpl = createSlot(COLLECTION_SLOT_NAME);
 	const CollectionSlot = import_react.forwardRef((props, forwardedRef) => {
 		const { scope, children } = props;
-		const composedRefs = useComposedRefs(forwardedRef, useCollectionContext(COLLECTION_SLOT_NAME, scope).collectionRef);
+		const context = useCollectionContext(COLLECTION_SLOT_NAME, scope);
+		const composedRefs = useComposedRefs(forwardedRef, context.collectionRef);
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CollectionSlotImpl, {
 			ref: composedRefs,
 			children
@@ -424,7 +425,8 @@ function createCollection2(name) {
 	const CollectionSlotImpl = createSlot(COLLECTION_SLOT_NAME);
 	const CollectionSlot = import_react.forwardRef((props, forwardedRef) => {
 		const { scope, children } = props;
-		const composedRefs = useComposedRefs(forwardedRef, useCollectionContext(COLLECTION_SLOT_NAME, scope).collectionRef);
+		const context = useCollectionContext(COLLECTION_SLOT_NAME, scope);
+		const composedRefs = useComposedRefs(forwardedRef, context.collectionRef);
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CollectionSlotImpl, {
 			ref: composedRefs,
 			children

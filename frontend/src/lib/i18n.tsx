@@ -21,6 +21,7 @@ type Dict = Record<string, string>;
 const en: Dict = {
   "brand.name": "Krishi Seva",
   "nav.home": "Home",
+  "nav.weather": "Weather",
   "nav.about": "About",
   "nav.market": "Market",
   "nav.schemes": "Schemes",
@@ -241,6 +242,7 @@ const en: Dict = {
 const hi: Dict = {
   "brand.name": "कृषि सेवा",
   "nav.home": "होम",
+  "nav.weather": "मौसम",
   "nav.about": "हमारे बारे में",
   "nav.market": "बाज़ार",
   "nav.schemes": "योजनाएँ",
@@ -460,6 +462,7 @@ const hi: Dict = {
 const gu: Dict = {
   "brand.name": "કૃષિ સેવા",
   "nav.home": "હોમ",
+  "nav.weather": "હવામાન",
   "nav.about": "અમારા વિશે",
   "nav.market": "બજાર",
   "nav.schemes": "યોજનાઓ",

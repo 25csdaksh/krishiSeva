@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
-import { a as Primitive, c as createContextScope, f as require_jsx_runtime } from "./@radix-ui/react-avatar+[...].mjs";
-//#region ../node_modules/@radix-ui/react-progress/dist/index.mjs
+import { m as require_jsx_runtime, o as Primitive, u as createContextScope } from "./@radix-ui/react-collapsible+[...].mjs";
+//#region node_modules/@radix-ui/react-progress/dist/index.mjs
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var import_jsx_runtime = require_jsx_runtime();
 var __defProp = Object.defineProperty;

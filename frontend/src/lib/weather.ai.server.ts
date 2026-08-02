@@ -2,8 +2,8 @@
 // AI-powered farming analysis via Lovable AI Gateway → Gemini 2.5 Flash
 // Server-only — never imported on the client.
 
-import process from 'node:process';
-import type { WeatherData, HistoricalDay } from './weather.server';
+import type { FullWeatherData, HistoricalDay } from "./weather.server";
+
 
 // ---------------------------------------------------------------------------
 // Gateway helper (mirrors existing ml.server.ts pattern)
@@ -230,7 +230,7 @@ function ruleBasedAnalysis(wd: WeatherData): WeatherAIAnalysis {
 // ---------------------------------------------------------------------------
 
 export async function analyzeWeatherForFarming(
-  weatherData: WeatherData,
+  weatherData: FullWeatherData,
   profile: {
     primary_crops?: string[] | null;
     soil_type?: string | null;

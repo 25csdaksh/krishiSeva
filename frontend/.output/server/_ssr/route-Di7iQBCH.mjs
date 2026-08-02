@@ -1,4 +1,4 @@
-import { f as require_jsx_runtime } from "../_libs/@radix-ui/react-avatar+[...].mjs";
+import { m as require_jsx_runtime } from "../_libs/@radix-ui/react-collapsible+[...].mjs";
 import { d as Outlet } from "../_libs/@tanstack/react-router+[...].mjs";
 //#region node_modules/.nitro/vite/services/ssr/assets/route-Di7iQBCH.js
 var import_jsx_runtime = require_jsx_runtime();

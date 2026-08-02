@@ -11,6 +11,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 const publicLinks = [
   { to: "/", key: "nav.home" },
+  { to: "/weather", key: "nav.weather" },
   { to: "/about", key: "nav.about" },
   { to: "/market", key: "nav.market" },
   { to: "/schemes", key: "nav.schemes" },

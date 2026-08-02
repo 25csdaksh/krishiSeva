@@ -1,5 +1,5 @@
 import { Buffer } from "node:buffer";
-//#region ../node_modules/iceberg-js/dist/index.mjs
+//#region node_modules/iceberg-js/dist/index.mjs
 var IcebergError = class extends Error {
 	constructor(message, opts) {
 		super(message);
@@ -496,7 +496,7 @@ var IcebergRestCatalog = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/storage-js/dist/index.mjs
+//#region node_modules/@supabase/storage-js/dist/index.mjs
 function _typeof(o) {
 	"@babel/helpers - typeof";
 	return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(o$1) {
@@ -2009,7 +2009,7 @@ var StorageFileApi = class extends BaseApiClient {
 		return query;
 	}
 };
-var DEFAULT_HEADERS = { "X-Client-Info": `storage-js/2.110.8` };
+var DEFAULT_HEADERS = { "X-Client-Info": `storage-js/2.111.0` };
 var StorageBucketApi = class extends BaseApiClient {
 	constructor(url, headers = {}, fetch$1, opts) {
 		const baseUrl = new URL(url);

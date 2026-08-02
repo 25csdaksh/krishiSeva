@@ -1,4 +1,4 @@
-//#region ../node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
+//#region node_modules/@floating-ui/utils/dist/floating-ui.utils.mjs
 /**
 * Custom positioning reference element.
 * @see https://floating-ui.com/docs/virtual-elements
@@ -127,7 +127,7 @@ function rectToClientRect(rect) {
 	};
 }
 //#endregion
-//#region ../node_modules/@floating-ui/core/dist/floating-ui.core.mjs
+//#region node_modules/@floating-ui/core/dist/floating-ui.core.mjs
 function computeCoordsFromPlacement(_ref, placement, rtl) {
 	let { reference, floating } = _ref;
 	const sideAxis = getSideAxis(placement);
@@ -400,9 +400,7 @@ var flip = function(options) {
 						if (placement) resetPlacement = placement;
 						break;
 					}
-					case "initialPlacement":
-						resetPlacement = initialPlacement;
-						break;
+					case "initialPlacement": resetPlacement = initialPlacement;
 				}
 				if (placement !== resetPlacement) return { reset: { placement: resetPlacement } };
 			}

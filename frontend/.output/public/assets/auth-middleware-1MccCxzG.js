@@ -1,0 +1,1 @@
+import{C as e}from"./index-DBAmdMTL.js";var t=e({type:`function`});export{t};

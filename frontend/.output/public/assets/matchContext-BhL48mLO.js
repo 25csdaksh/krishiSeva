@@ -1,0 +1,1 @@
+import{a as e,c as t}from"./useRouter-BzYNxvEH.js";var n=`__root__`,r=t(e(),1),i=r.createContext(void 0),a=r.createContext(void 0);export{i as n,n as r,a as t};

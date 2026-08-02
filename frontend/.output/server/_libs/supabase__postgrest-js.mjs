@@ -1,4 +1,4 @@
-//#region ../node_modules/@supabase/postgrest-js/dist/index.mjs
+//#region node_modules/@supabase/postgrest-js/dist/index.mjs
 /**
 * Default number of retry attempts.
 */

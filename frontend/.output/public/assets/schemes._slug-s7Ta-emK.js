@@ -1,0 +1,1 @@
+import{r as e}from"./useRouter-BzYNxvEH.js";import{t}from"./PageShell-CPfaufiC.js";var n=e(),r=({error:e})=>(0,n.jsx)(t,{children:(0,n.jsx)(`p`,{className:`mx-auto max-w-3xl px-4 py-16 text-sm text-destructive`,role:`alert`,children:e.message})});export{r as errorComponent};

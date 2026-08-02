@@ -1,1 +1,0 @@
-import{M as e,j as t}from"./removable-DCeU5-3W.js";var n=t({method:`GET`}).handler(e(`e7113b46eeba9c39b4fc73c2fba784769d48e4a2f78effc9d72f62f31e1f5d02`)),r=t({method:`GET`}).handler(e(`000a2ed966cbc68c916c7d3d51be3d4fc0697713b5a4f4ec7d9791ebd86fa5d8`));export{r as n,n as t};

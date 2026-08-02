@@ -1,4 +1,4 @@
-//#region ../node_modules/@tanstack/query-core/build/modern/subscribable.js
+//#region node_modules/@tanstack/query-core/build/modern/subscribable.js
 var Subscribable = class {
 	constructor() {
 		this.listeners = /* @__PURE__ */ new Set();
@@ -19,7 +19,7 @@ var Subscribable = class {
 	onUnsubscribe() {}
 };
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/focusManager.js
+//#region node_modules/@tanstack/query-core/build/modern/focusManager.js
 var FocusManager = class extends Subscribable {
 	#focused;
 	#cleanup;
@@ -72,7 +72,7 @@ var FocusManager = class extends Subscribable {
 };
 var focusManager = new FocusManager();
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/timeoutManager.js
+//#region node_modules/@tanstack/query-core/build/modern/timeoutManager.js
 var defaultTimeoutProvider = {
 	setTimeout: (callback, delay) => setTimeout(callback, delay),
 	clearTimeout: (timeoutId) => clearTimeout(timeoutId),
@@ -103,7 +103,7 @@ function systemSetTimeoutZero(callback) {
 	setTimeout(callback, 0);
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/utils.js
+//#region node_modules/@tanstack/query-core/build/modern/utils.js
 var isServer = typeof window === "undefined" || "Deno" in globalThis;
 function noop() {}
 function functionalUpdate(updater, input) {
@@ -269,7 +269,7 @@ function addConsumeAwareSignal(object, getSignal, onCancelled) {
 	return object;
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/environmentManager.js
+//#region node_modules/@tanstack/query-core/build/modern/environmentManager.js
 var environmentManager = /* @__PURE__ */ (() => {
 	let isServerFn = () => isServer;
 	return {
@@ -288,7 +288,7 @@ var environmentManager = /* @__PURE__ */ (() => {
 	};
 })();
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/thenable.js
+//#region node_modules/@tanstack/query-core/build/modern/thenable.js
 function pendingThenable() {
 	let resolve;
 	let reject;
@@ -320,7 +320,7 @@ function pendingThenable() {
 	return thenable;
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/notifyManager.js
+//#region node_modules/@tanstack/query-core/build/modern/notifyManager.js
 var defaultScheduler = systemSetTimeoutZero;
 function createNotifyManager() {
 	let queue = [];
@@ -393,7 +393,7 @@ function createNotifyManager() {
 }
 var notifyManager = createNotifyManager();
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/onlineManager.js
+//#region node_modules/@tanstack/query-core/build/modern/onlineManager.js
 var OnlineManager = class extends Subscribable {
 	#online = true;
 	#cleanup;
@@ -441,7 +441,7 @@ var OnlineManager = class extends Subscribable {
 };
 var onlineManager = new OnlineManager();
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/retryer.js
+//#region node_modules/@tanstack/query-core/build/modern/retryer.js
 function defaultRetryDelay(failureCount) {
 	return Math.min(1e3 * 2 ** failureCount, 3e4);
 }
@@ -547,7 +547,7 @@ function createRetryer(config) {
 	};
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/removable.js
+//#region node_modules/@tanstack/query-core/build/modern/removable.js
 var Removable = class {
 	#gcTimeout;
 	destroy() {
@@ -560,7 +560,7 @@ var Removable = class {
 		}, this.gcTime);
 	}
 	updateGcTime(newGcTime) {
-		this.gcTime = Math.max(this.gcTime || 0, newGcTime ?? (environmentManager.isServer() ? Infinity : 300 * 1e3));
+		this.gcTime = Math.max(this.gcTime || 0, newGcTime ?? (environmentManager.isServer() ? Infinity : 3e5));
 	}
 	clearGcTimeout() {
 		if (this.#gcTimeout !== void 0) {
@@ -570,7 +570,7 @@ var Removable = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/infiniteQueryBehavior.js
+//#region node_modules/@tanstack/query-core/build/modern/infiniteQueryBehavior.js
 function infiniteQueryBehavior(pages) {
 	return { onFetch: (context, query) => {
 		const options = context.options;
@@ -649,7 +649,7 @@ function getPreviousPageParam(options, { pages, pageParams }) {
 	return pages.length > 0 ? options.getPreviousPageParam?.(pages[0], pages, pageParams[0], pageParams) : void 0;
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/query.js
+//#region node_modules/@tanstack/query-core/build/modern/query.js
 var Query = class extends Removable {
 	#queryType;
 	#initialState;
@@ -1021,7 +1021,7 @@ function getDefaultState$1(options) {
 	};
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/queryObserver.js
+//#region node_modules/@tanstack/query-core/build/modern/queryObserver.js
 var QueryObserver = class extends Subscribable {
 	constructor(client, options) {
 		super();
@@ -1285,9 +1285,7 @@ var QueryObserver = class extends Subscribable {
 				case "fulfilled":
 					if (isErrorWithoutData || nextResult.data !== prevThenable.value) recreateThenable();
 					break;
-				case "rejected":
-					if (!isErrorWithoutData || nextResult.error !== prevThenable.reason) recreateThenable();
-					break;
+				case "rejected": if (!isErrorWithoutData || nextResult.error !== prevThenable.reason) recreateThenable();
 			}
 		}
 		return nextResult;
@@ -1365,7 +1363,7 @@ function shouldAssignObserverCurrentProperties(observer, optimisticResult) {
 	return false;
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/mutation.js
+//#region node_modules/@tanstack/query-core/build/modern/mutation.js
 var Mutation = class extends Removable {
 	#client;
 	#observers;
@@ -1579,7 +1577,7 @@ function getDefaultState() {
 	};
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/mutationCache.js
+//#region node_modules/@tanstack/query-core/build/modern/mutationCache.js
 var MutationCache = class extends Subscribable {
 	constructor(config = {}) {
 		super();
@@ -1686,7 +1684,7 @@ function scopeFor(mutation) {
 	return mutation.options.scope?.id;
 }
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/mutationObserver.js
+//#region node_modules/@tanstack/query-core/build/modern/mutationObserver.js
 var MutationObserver = class extends Subscribable {
 	#client;
 	#currentResult = void 0;
@@ -1790,7 +1788,7 @@ var MutationObserver = class extends Subscribable {
 	}
 };
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/queryCache.js
+//#region node_modules/@tanstack/query-core/build/modern/queryCache.js
 var QueryCache = class extends Subscribable {
 	constructor(config = {}) {
 		super();
@@ -1882,7 +1880,7 @@ var QueryCache = class extends Subscribable {
 	}
 };
 //#endregion
-//#region ../node_modules/@tanstack/query-core/build/modern/queryClient.js
+//#region node_modules/@tanstack/query-core/build/modern/queryClient.js
 var QueryClient = class {
 	#queryCache;
 	#mutationCache;

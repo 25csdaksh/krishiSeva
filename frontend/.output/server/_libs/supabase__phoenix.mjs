@@ -1,4 +1,4 @@
-//#region ../node_modules/@supabase/phoenix/priv/static/phoenix.mjs
+//#region node_modules/@supabase/phoenix/priv/static/phoenix.mjs
 var closure = (value) => {
 	if (typeof value === "function") return value;
 	else {

@@ -1,12 +1,12 @@
 import { n as __esmMin } from "../_runtime.mjs";
 import { n as Socket, t as Presence } from "./supabase__phoenix.mjs";
-//#region ../node_modules/unenv/dist/runtime/polyfill/globalthis.mjs
+//#region node_modules/unenv/dist/runtime/polyfill/globalthis.mjs
 var globalthis_default;
 var init_globalthis = __esmMin((() => {
 	globalthis_default = globalThis;
 }));
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/lib/websocket-factory.js
+//#region node_modules/@supabase/realtime-js/dist/module/lib/websocket-factory.js
 init_globalthis();
 /**
 * Utilities for creating WebSocket instances across runtimes.
@@ -101,8 +101,8 @@ var WebSocketFactory = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/lib/constants.js
-var DEFAULT_VERSION = `realtime-js/2.110.8`;
+//#region node_modules/@supabase/realtime-js/dist/module/lib/constants.js
+var DEFAULT_VERSION = `realtime-js/2.111.0`;
 var VSN_1_0_0 = "1.0.0";
 var VSN_2_0_0 = "2.0.0";
 var DEFAULT_VSN = VSN_2_0_0;
@@ -129,7 +129,7 @@ var CONNECTION_STATE = {
 	closed: "closed"
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/lib/serializer.js
+//#region node_modules/@supabase/realtime-js/dist/module/lib/serializer.js
 var Serializer = class {
 	constructor(allowedMetadataKeys) {
 		this.HEADER_LENGTH = 1;
@@ -272,7 +272,7 @@ var Serializer = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/lib/transformers.js
+//#region node_modules/@supabase/realtime-js/dist/module/lib/transformers.js
 /**
 * Helpers to convert the change Payload into native JS types.
 */
@@ -459,7 +459,7 @@ var httpEndpointURL = (socketUrl) => {
 	return wsUrl.href;
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/phoenix/presenceAdapter.js
+//#region node_modules/@supabase/realtime-js/dist/module/phoenix/presenceAdapter.js
 var PresenceAdapter = class PresenceAdapter {
 	constructor(channel, opts) {
 		const phoenixOptions = phoenixPresenceOptions(opts);
@@ -529,10 +529,12 @@ var PresenceAdapter = class PresenceAdapter {
 };
 function transformState(presences) {
 	return presences.metas.map((presence) => {
-		presence["presence_ref"] = presence["phx_ref"];
-		delete presence["phx_ref"];
-		delete presence["phx_ref_prev"];
-		return presence;
+		const descriptors = Object.getOwnPropertyDescriptors(presence);
+		const transformedPresence = Object.defineProperties({}, descriptors);
+		transformedPresence["presence_ref"] = transformedPresence["phx_ref"];
+		delete transformedPresence["phx_ref"];
+		delete transformedPresence["phx_ref_prev"];
+		return transformedPresence;
 	});
 }
 function cloneState(state) {
@@ -545,7 +547,7 @@ function parseCurrentPresences(currentPresences) {
 	return (currentPresences === null || currentPresences === void 0 ? void 0 : currentPresences.metas) ? transformState(currentPresences) : [];
 }
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/RealtimePresence.js
+//#region node_modules/@supabase/realtime-js/dist/module/RealtimePresence.js
 var REALTIME_PRESENCE_LISTEN_EVENTS;
 (function(REALTIME_PRESENCE_LISTEN_EVENTS) {
 	REALTIME_PRESENCE_LISTEN_EVENTS["SYNC"] = "sync";
@@ -579,7 +581,7 @@ var RealtimePresence = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/lib/normalizeChannelError.js
+//#region node_modules/@supabase/realtime-js/dist/module/lib/normalizeChannelError.js
 /**
 * Normalize the various shapes a channel error reason can take into a real `Error`.
 *
@@ -602,7 +604,7 @@ function normalizeChannelError(reason) {
 	return /* @__PURE__ */ new Error("channel error: connection lost");
 }
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/phoenix/channelAdapter.js
+//#region node_modules/@supabase/realtime-js/dist/module/phoenix/channelAdapter.js
 var ChannelAdapter = class {
 	constructor(socket, topic, params) {
 		const phoenixParams = phoenixChannelParams(params);
@@ -705,7 +707,7 @@ function phoenixChannelParams(options) {
 	}, options.config) };
 }
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/RealtimePostgresFilterBuilder.js
+//#region node_modules/@supabase/realtime-js/dist/module/RealtimePostgresFilterBuilder.js
 var PostgrestReservedCharsRegexp = /[,()"\\]/;
 var needsQuoting = (value) => PostgrestReservedCharsRegexp.test(value) || value !== value.trim();
 var quote = (value) => `"${value.replace(/\\/g, "\\\\").replace(/"/g, "\\\"")}"`;
@@ -841,7 +843,7 @@ var RealtimePostgresFilterBuilder = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/RealtimeChannel.js
+//#region node_modules/@supabase/realtime-js/dist/module/RealtimeChannel.js
 var REALTIME_POSTGRES_CHANGES_LISTEN_EVENT;
 (function(REALTIME_POSTGRES_CHANGES_LISTEN_EVENT) {
 	REALTIME_POSTGRES_CHANGES_LISTEN_EVENT["ALL"] = "*";
@@ -1507,7 +1509,7 @@ var RealtimeChannel = class RealtimeChannel {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/phoenix/socketAdapter.js
+//#region node_modules/@supabase/realtime-js/dist/module/phoenix/socketAdapter.js
 var SocketAdapter = class {
 	constructor(endPoint, options) {
 		this.socket = new Socket(endPoint, options);
@@ -1616,7 +1618,7 @@ var SocketAdapter = class {
 	}
 };
 //#endregion
-//#region ../node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js
+//#region node_modules/@supabase/realtime-js/dist/module/RealtimeClient.js
 var CONNECTION_TIMEOUTS = {
 	HEARTBEAT_INTERVAL: 25e3,
 	RECONNECT_DELAY: 10,
