@@ -161,5 +161,4 @@ export function MandiPricesSection() {
   );
 }
 
-// keep Route pointing to a redirect so the old /mandi-prices URL lands on /market
-Route.update({ component: RedirectToMarket });
+
