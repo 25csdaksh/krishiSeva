@@ -1,0 +1,1 @@
+var e=`/assets/fields-aerial-BhVvSmcw.jpg`,t=`/assets/hero-farmer-DagyZTHV.jpg`;export{e as n,t};

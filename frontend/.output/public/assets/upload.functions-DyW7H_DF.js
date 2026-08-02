@@ -1,0 +1,1 @@
+import{M as e,j as t}from"./removable-DCeU5-3W.js";import{t as n}from"./auth-middleware-JDjVgB0Q.js";var r=t({method:`POST`}).middleware([n]).handler(e(`d5ebf9288da2928e756c5304fbbf0160c275e3f4622a068a1ff8e9613e707e3e`));t({method:`POST`}).middleware([n]).handler(e(`bab43f377381f85bc380afe3f5d609a7316608f1db4e6bfd44d256b0761db7fd`));export{r as t};

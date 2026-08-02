@@ -1,0 +1,1 @@
+import{r as e}from"./useRouter-CUzk5ziF.js";import{t}from"./PageShell-BezmMuT4.js";var n=e(),r=()=>(0,n.jsx)(t,{children:(0,n.jsx)(`p`,{className:`mx-auto max-w-3xl px-4 py-16 text-sm text-muted-foreground`,children:`Scheme not found.`})});export{r as notFoundComponent};

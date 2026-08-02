@@ -1,0 +1,1 @@
+var e=[`kharif`,`rabi`,`zaid`,`summer`,`winter`];function t(e=new Date){let t=e.getMonth()+1;return t>=6&&t<=10?`kharif`:t>=11||t<=3?`rabi`:`zaid`}export{t as n,e as t};
